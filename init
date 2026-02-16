@@ -1,0 +1,26 @@
+I want to create a character generator for my ttrpg game which is described in file fantasy-crux-v1.4.1-printer.pdf. The generator should be full featured and support all the following:
+
+1. Input fields for character name, concept and short and long term goals (very brief description of 1 sentence each), age, gender, and characteristics. 
+2. A placeholder for the user to later add a character portrait
+3. Calculate attributes (hit points, power points,damage modifer, combat order, major wound) based on characteristics.
+4. Input field for hero points, will default in 2
+5. Input field for movement rate, will default in 15 meters per round
+6. Input field for Improvement Points, will default to 10
+7. Input field for Close Combat Weapons, 3 of them. For each weapon you will have a weapon name, damage, size and notes fields. You should be able to select the weapon from a dropdown list. The dropdown list should contain all the available weapons.
+8. Input field for Ranged weapons, 4 of them. For each weapon you will have a weapon name, damage, range, rate of fire, ammunition and notes fields. You should be able to select the weapon from a dropdown list. The dropdown list should contain all the available weapons.
+9. Input field for Unarmed Combat Weapons, 3 of them. For each weapon you will have a weapon name, damage, size and notes fields. Prefill the first entry with "Fist / Kick", "1D3", "-" and "".
+10. Input field for Armor Type and Armor points. You should be able to select the armor from a dropdown list. The dropdown list should contain all the available armors.
+11. Allow two entries for Fatigue. "Fatigued" and "Exhausted". It should have a small empty box next to the words so that character can check it.
+12. Display a list of all the available skills (grouped by category) and precalculate the skill points based on the characteristics. the use can then add some of his skill points to specific skills. When he does the pool of skill points is reduced by the amount of skill points added to the skill. The skill points are displayed in the skill list. Somewhere you have to also display the available skill points for each skill category separately (Resistances, Combat, Knowledge, Practical). Some skills will have multiple entries so tha the user can add specific versions of it (incl. 3 entries for Culture, and Language, 2 entries for Lore and Craft)
+13. Input field for equipment. It should have at least 20 entries and include the item name and "ENC" for each one. The user should be able to select the item from a list which will include a search function. The list should be scrollable and should have a fixed height.
+14. 3 input fields to display the disciplines the user acquired. User should be able to select the discipline from a dropdown list. The dropdown list should contain all the available disciplines. When you select a discipline the improvement points are reduced by the amount of improvement points needed to acquire the discipline. 
+15. Input fields for all the powers the user gets. At least 15 entries which will include "Name", "Magnitude", Discipline, and "Description". The user should be able to select the power from a list which will include a search function. The list should be scrollable and should have a fixed height.
+16. Input fields for the characters Wealth. It will inlude free form (empty for the user to fill in later) Land / Property / Income / Coins
+17. Input fields for the characters relationships. It will inlude free form for friends and enemies.
+18. Input fields for the characters background. It will inlude free form for background will significant space.
+
+For all the above consult the pdf file fantasy-crux-v1.4.1-printer.pdf.
+
+I want to be able to send this as a cross platform application to my players. It should be created with web technologies and tauri for the desktop application.. The application should be really presentable. It should include smart graphics depending on what is shown. For example Armor could have an Armor image and inside it would have the two armor fields (Armor Type and Armor Points). 
+
+I want to be able to export the character to a pdf file. The pdf file should be formatted as a booklet and it should be really presentable, e.g. include image/graphics as appropriate to what is shown. The booklet should have a cover page with the character name and a placeholder for the portrait. The booklet should have a table of contents. The booklet should have a section for the character description. The booklet should have a section for the character attributes. The booklet should have a section for the character skills. The booklet should have a section for the character equipment. The booklet should have a section for the character background. The booklet should have a section for the character equipment. The booklet should have a section for the character equipment. The empty spaces should be appropriately noted so (e.g. it will be an empty box, or it will contain a line which should make it obvious that it is empty).
