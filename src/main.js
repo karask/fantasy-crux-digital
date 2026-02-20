@@ -20,7 +20,7 @@ const state = {
   ipConvertedToSkills: 0,
   equipmentItems: Array(20).fill({ name: '', enc: '' }),
   disciplineSelections: ['', '', ''],
-  powerEntries: Array(15).fill({ name: '', magnitude: '', discipline: '', description: '' })
+  powerEntries: Array(20).fill({ name: '', magnitude: '', discipline: '', description: '' })
 };
 
 // ============ IP POOL ============
@@ -35,7 +35,7 @@ function getIPSpentOnAbilities() {
     }
   }
   // Power magnitudes
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 20; i++) {
     const magEl = document.getElementById(`power-mag-${i}`);
     const nameEl = document.getElementById(`power-name-${i}`);
     if (nameEl && nameEl.value.trim() && magEl) {
@@ -759,7 +759,7 @@ function renderDisciplines() {
         const stillActive = state.disciplineSelections.filter(d => d);
         // Only clear if no other slot still has this discipline
         if (!stillActive.includes(oldDisc)) {
-          for (let p = 0; p < 15; p++) {
+          for (let p = 0; p < 20; p++) {
             const discEl = document.getElementById(`power-disc-${p}`);
             if (discEl && discEl.value === oldDisc) {
               document.getElementById(`power-name-${p}`).value = '';
@@ -780,7 +780,7 @@ function renderDisciplines() {
 function renderPowers() {
   const container = document.getElementById('powers-list');
   container.innerHTML = '';
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 20; i++) {
     const row = document.createElement('div');
     row.className = 'power-row';
     row.innerHTML = `
@@ -857,6 +857,36 @@ function updateWeaponDamages(dm) {
           suffix = dmDisplay;
         }
         document.getElementById(`rw-damage-${i}`).value = base + suffix;
+      }
+    }
+  }
+
+  // Unarmed Combat
+  for (let i = 0; i < 3; i++) {
+    const nameEl = document.getElementById(`ua-name-${i}`);
+    const damageEl = document.getElementById(`ua-damage-${i}`);
+    if (nameEl && damageEl) {
+      // Logic: Fist/Kick usually 1D3 + DM. 
+      // If the field is manually edited we might rely on a 'base' data attribute, 
+      // but simple text inputs don't store base damage easily unless we add it.
+      // For now, if it's the default "Fist/Kick", we reset it.
+      if (nameEl.value === 'Fist/Kick') {
+        damageEl.value = '1D3' + dmDisplay;
+      } else if (nameEl.value.trim() !== '') {
+        // If user typed something else, we append DM if it looks like a damage die? 
+        // Safest to just append DM if it's not empty, or leave it to user?
+        // The prompt specifically asks to update DM to unarmed entries.
+        // Let's assume we append DM to whatever is there, but that's risky if we keep appending.
+        // Better approach: Unarmed inputs don't have a structured "base". 
+        // We will ONLY auto-update "Fist/Kick" slot (index 0) or slots that explicitly say "Fist/Kick".
+        // Or we can try to strip existing DM and re-append. 
+        // Given the simplicity, let's target index 0 if it is Fist/Kick.
+      }
+
+      // Actually, looking at `renderUnarmedWeapons`, index 0 starts as 'Fist/Kick' with value '1D3'.
+      // We should update that one.
+      if (i === 0 && nameEl.value === 'Fist/Kick') {
+        damageEl.value = '1D3' + dmDisplay;
       }
     }
   }
@@ -1424,7 +1454,7 @@ async function exportPDF() {
 
   // --- Powers ---
   const powerEntries = [];
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 20; i++) {
     const name = getVal(`power-name-${i}`);
     if (name) {
       powerEntries.push({

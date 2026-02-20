@@ -3,6 +3,8 @@
    Dark Fantasy / Parchment Theme
    ======================================== */
 
+@import './layout.css';
+
 /* === CSS Variables / Design Tokens === */
 :root {
   --bg-dark: #0f0f1e;
@@ -797,13 +799,7 @@ textarea.input-ornate {
   flex: 1;
 }
 
-.armor-selector label {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--text-medium);
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-}
+
 
 /* === Checkbox Custom === */
 .fatigue-row {
@@ -1260,4 +1256,302 @@ textarea.input-ornate {
   visibility: visible;
   opacity: 1;
   bottom: 50px;
+}
+
+/* === Filter Buttons === */
+.btn-filter {
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--text-muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-header);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.btn-filter:hover {
+  background: rgba(201, 169, 92, 0.1);
+  color: var(--text-light);
+}
+
+/* === Combat Module === */
+.action-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(201, 169, 92, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  transition: var(--transition);
+}
+
+.action-item:hover {
+  background: rgba(201, 169, 92, 0.05);
+  border-color: var(--gold);
+}
+
+.action-item h4 {
+  color: var(--gold-bright);
+  font-family: var(--font-header);
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+/* === Powers Module === */
+.powers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.power-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(201, 169, 92, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  transition: var(--transition);
+}
+
+.power-card:hover {
+  background: rgba(201, 169, 92, 0.05);
+  border-color: var(--gold);
+}
+
+.power-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.power-header h4 {
+  color: var(--gold-bright);
+  font-family: var(--font-header);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.power-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.power-cost {
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  background: rgba(0, 191, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.power-type {
+  font-size: 0.75rem;
+  color: var(--text-medium);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Spot Rules Module === */
+.spot-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.spot-rule-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.spot-rule-card h4 {
+  color: var(--text-bright);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.3rem;
+}
+
+.rule-row {
+  display: flex;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.rule-row.description {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--text-medium);
+}
+
+.rule-row .label {
+  font-weight: bold;
+  color: var(--text-medium);
+  margin-right: 0.5rem;
+  min-width: 60px;
+}
+
+/* === Creatures Module === */
+.creatures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.creature-card {
+  background: rgba(10, 10, 10, 0.4);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  /* Dark red tint */
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+.creature-card:hover {
+  border-color: rgba(200, 50, 50, 0.6);
+  background: rgba(20, 10, 10, 0.6);
+}
+
+.creature-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.creature-header h4 {
+  color: #ff6b6b;
+  /* Reddish for monsters */
+  font-family: var(--font-header);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.creature-category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-medium);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.creature-basics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+
+.creature-stats-line {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--accent-blue);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.4rem;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.creature-combat {
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.creature-combat div {
+  margin-bottom: 0.2rem;
+}
+
+/* === Module Tables & Typography === */
+.module-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  /* Larger font as requested */
+  color: var(--text-light);
+}
+
+.module-table th,
+.module-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  vertical-align: top;
+}
+
+.module-table th {
+  color: var(--gold);
+  font-family: var(--font-header);
+  font-size: 1.2rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.module-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.col-name {
+  width: 20%;
+  font-weight: bold;
+  color: var(--gold-bright);
+}
+
+.col-base {
+  width: 15%;
+  font-family: monospace;
+  color: var(--accent-blue);
+}
+
+.col-desc {
+  width: 65%;
+  line-height: 1.6;
+}
+
+.text-large {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.section-header-large {
+  color: var(--gold-bright);
+  font-family: var(--font-header);
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.subsection-header {
+  color: var(--text-light);
+  font-family: var(--font-header);
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.highlight-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-gold);
+  padding: 1.5rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
 }

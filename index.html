@@ -11,405 +11,531 @@
   <link
     href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/src/styles/index.css" />
+  <link rel="stylesheet" href="src/styles/index.css" />
 </head>
 
 <body>
-  <div id="app">
-    <!-- Top Header -->
-    <header class="app-header">
-      <div class="header-ornament left"></div>
-      <h1 class="app-title">Fantasy Crux</h1>
-      <p class="app-subtitle">Character Generator</p>
-      <div class="header-ornament right"></div>
-    </header>
-
-    <!-- Action Bar -->
-    <div class="action-bar">
-      <button id="btn-export-pdf" class="btn btn-gold" title="Export character to PDF booklet">
-        <span class="btn-icon">📜</span> Export to PDF
-      </button>
-      <button id="btn-reset" class="btn btn-danger" title="Reset all fields">
-        <span class="btn-icon">🔄</span> New Character
-      </button>
-    </div>
-
-    <!-- Tab Navigation -->
-    <nav class="tab-nav" id="tab-nav">
-      <button class="tab-btn active" data-tab="introduction">
-        <span class="tab-icon">👤</span> Introduction
-      </button>
-      <button class="tab-btn" data-tab="combat">
-        <span class="tab-icon">⚔️</span> Combat
-      </button>
-      <button class="tab-btn" data-tab="skills">
-        <span class="tab-icon">📜</span> Skills
-      </button>
-      <button class="tab-btn" data-tab="equipment">
-        <span class="tab-icon">🎒</span> Equipment
-      </button>
-      <button class="tab-btn" data-tab="disciplines">
-        <span class="tab-icon">🔮</span> Disciplines
-      </button>
-      <button class="tab-btn" data-tab="other">
-        <span class="tab-icon">📖</span> Other
-      </button>
-    </nav>
-
-    <!-- Tab Panels -->
-    <main class="tab-content">
-
-      <!-- ======== INTRODUCTION TAB ======== -->
-      <div class="tab-panel active" id="tab-introduction">
-        <div class="tab-grid tab-grid-intro">
-
-          <!-- Portrait (moved first) -->
-          <section class="card" id="section-portrait">
-            <div class="card-header">
-              <span class="card-icon">🖼️</span>
-              <h2>Portrait</h2>
-            </div>
-            <div class="card-body">
-              <div class="portrait-placeholder" id="portrait-placeholder">
-                <div class="portrait-frame">
-                  <span class="portrait-text">Click to add portrait</span>
-                  <input type="file" id="portrait-upload" accept="image/*" style="display: none;" />
-                  <img id="portrait-img" class="portrait-img" style="display: none;" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Character Info -->
-          <section class="card" id="section-info">
-            <div class="card-header">
-              <span class="card-icon">👤</span>
-              <h2>Character Info</h2>
-            </div>
-            <div class="card-body">
-              <div class="form-row">
-                <label for="char-name">Name</label>
-                <input type="text" id="char-name" placeholder="Enter character name..."
-                  class="input-ornate input-large" />
-              </div>
-              <div class="form-row">
-                <label for="char-concept">Concept</label>
-                <input type="text" id="char-concept" placeholder="A determined and foolhardy warrior..."
-                  class="input-ornate" />
-              </div>
-              <div class="form-row">
-                <label for="char-short-goal">Short-Term Goal</label>
-                <input type="text" id="char-short-goal" placeholder="Brief goal..." class="input-ornate" />
-              </div>
-              <div class="form-row">
-                <label for="char-long-goal">Long-Term Goal</label>
-                <input type="text" id="char-long-goal" placeholder="Brief goal..." class="input-ornate" />
-              </div>
-              <div class="form-row-group">
-                <div class="form-row">
-                  <label for="char-age">Age</label>
-                  <input type="number" id="char-age" value="20" min="18" max="99" class="input-ornate input-small" />
-                </div>
-                <div class="form-row">
-                  <label for="char-gender">Gender</label>
-                  <input type="text" id="char-gender" placeholder="Gender..." class="input-ornate input-small" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Characteristics + Attributes + Special (compact) -->
-          <section class="card" id="section-stats">
-            <div class="card-header">
-              <span class="card-icon">⚡</span>
-              <h2>Characteristics</h2>
-              <span class="points-badge" id="char-points-remaining">30 pts</span>
-            </div>
-            <div class="card-body card-body-compact">
-              <div class="characteristics-grid" id="characteristics-grid">
-                <!-- Generated by JS -->
-              </div>
-
-              <div class="subsection-header">
-                <span class="card-icon">🛡️</span>
-                <h3>Attributes</h3>
-              </div>
-              <div class="attributes-grid attributes-grid-2row">
-                <div class="attr-item">
-                  <span class="attr-label">Hit Points</span>
-                  <span class="attr-value" id="attr-hp">8</span>
-                </div>
-                <div class="attr-item">
-                  <span class="attr-label">Power Points</span>
-                  <span class="attr-value" id="attr-pp">8</span>
-                </div>
-                <div class="attr-item">
-                  <span class="attr-label">Damage Modifier</span>
-                  <span class="attr-value" id="attr-dm">+0</span>
-                </div>
-                <div class="attr-item">
-                  <span class="attr-label">Combat Order</span>
-                  <span class="attr-value" id="attr-co">8</span>
-                </div>
-                <div class="attr-item">
-                  <span class="attr-label">Major Wound</span>
-                  <span class="attr-value" id="attr-mw">4</span>
-                </div>
-                <div class="attr-item">
-                  <span class="attr-label">Movement</span>
-                  <span class="attr-value"><input type="number" id="movement-rate" value="15" min="0"
-                      class="attr-input" /></span>
-                </div>
-              </div>
-
-              <div class="section-divider"></div>
-
-              <div class="special-row">
-                <div class="attr-item attr-item-compact">
-                  <span class="attr-label">Hero Pts</span>
-                  <span class="attr-value"><input type="number" id="hero-points" value="2" min="0"
-                      class="attr-input" /></span>
-                </div>
-                <div class="attr-item attr-item-compact">
-                  <span class="attr-label">Improvement Pts</span>
-                  <span class="attr-value" id="ip-display">10</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        </div>
+  <div id="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">Fantasy Crux</h1>
+        <p class="sidebar-subtitle">Digital Tools</p>
       </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-module="character-generator">
+          <span class="nav-icon">👤</span> Generator
+        </button>
+        <button class="nav-item" data-module="skills">
+          <span class="nav-icon">📜</span> Skills
+        </button>
+        <button class="nav-item" data-module="equipment">
+          <span class="nav-icon">🎒</span> Equipment
+        </button>
+        <button class="nav-item" data-module="combat">
+          <span class="nav-icon">⚔️</span> Combat
+        </button>
+        <button class="nav-item" data-module="powers">
+          <span class="nav-icon">🔮</span> Powers
+        </button>
+        <button class="nav-item" data-module="spot-rules">
+          <span class="nav-icon">🔍</span> Spot Rules
+        </button>
+        <button class="nav-item" data-module="gm-tools">
+          <span class="nav-icon">🎲</span> GM Tools
+        </button>
+        <button class="nav-item" data-module="monsters">
+          <span class="nav-icon">🐉</span> Creatures
+        </button>
+        <div class="nav-divider"></div>
+        <button class="nav-item" data-module="license">
+          <span class="nav-icon">⚖️</span> License
+        </button>
+      </nav>
+      <footer class="sidebar-footer">
+        <p>v1.0.3</p>
+      </footer>
+    </aside>
 
-      <!-- ======== COMBAT TAB ======== -->
-      <div class="tab-panel" id="tab-combat">
-        <div class="tab-grid tab-grid-combat">
+    <!-- Main Content Area -->
+    <main class="main-content">
 
-          <!-- Close Combat Weapons -->
-          <section class="card" id="section-close-combat">
-            <div class="card-header">
-              <span class="card-icon">⚔️</span>
-              <h2>Close Combat Weapons</h2>
-            </div>
-            <div class="card-body">
-              <div class="weapons-table" id="close-combat-weapons">
-                <!-- Generated by JS -->
-              </div>
-            </div>
-          </section>
+      <!-- MODULE: Character Generator (Existing Content) -->
+      <div id="module-character-generator" class="module active">
+        <!-- Top Header (Local to Module) -->
+        <header class="module-header">
+          <div class="header-ornament left"></div>
+          <h2>Character Generator</h2>
+          <div class="header-ornament right"></div>
+        </header>
 
-          <!-- Ranged Weapons -->
-          <section class="card" id="section-ranged">
-            <div class="card-header">
-              <span class="card-icon">🏹</span>
-              <h2>Ranged Weapons</h2>
-            </div>
-            <div class="card-body">
-              <div class="weapons-table" id="ranged-weapons">
-                <!-- Generated by JS -->
-              </div>
-            </div>
-          </section>
+        <!-- Action Bar -->
+        <div class="action-bar">
+          <button id="btn-export-pdf" class="btn btn-gold" title="Export character to PDF booklet">
+            <span class="btn-icon">📜</span> Export to PDF
+          </button>
+          <button id="btn-reset" class="btn btn-danger" title="Reset all fields">
+            <span class="btn-icon">🔄</span> New Character
+          </button>
+        </div>
 
-          <!-- Unarmed Combat -->
-          <section class="card" id="section-unarmed">
-            <div class="card-header">
-              <span class="card-icon">👊</span>
-              <h2>Unarmed Combat</h2>
-            </div>
-            <div class="card-body">
-              <div class="weapons-table" id="unarmed-weapons">
-                <!-- Generated by JS -->
-              </div>
-            </div>
-          </section>
+        <!-- Tab Navigation -->
+        <nav class="tab-nav" id="tab-nav">
+          <button class="tab-btn active" data-tab="introduction">
+            <span class="tab-icon">👤</span> Introduction
+          </button>
+          <button class="tab-btn" data-tab="combat">
+            <span class="tab-icon">⚔️</span> Combat
+          </button>
+          <button class="tab-btn" data-tab="skills">
+            <span class="tab-icon">📜</span> Skills
+          </button>
+          <button class="tab-btn" data-tab="equipment">
+            <span class="tab-icon">🎒</span> Equipment
+          </button>
+          <button class="tab-btn" data-tab="disciplines">
+            <span class="tab-icon">🔮</span> Disciplines
+          </button>
+          <button class="tab-btn" data-tab="other">
+            <span class="tab-icon">📖</span> Other
+          </button>
+        </nav>
 
-          <!-- Armor -->
-          <section class="card" id="section-armor">
-            <div class="card-header">
-              <span class="card-icon">🛡️</span>
-              <h2>Armor</h2>
-            </div>
-            <div class="card-body">
-              <div class="armor-display">
-                <div class="armor-visual">
-                  <div class="armor-shield-graphic">
-                    <div class="shield-body">
-                      <div class="shield-type" id="armor-type-display">None</div>
-                      <div class="shield-ap" id="armor-ap-display">AP: 0</div>
-                      <div class="shield-enc" id="armor-enc-display">ENC: 0</div>
+        <!-- Tab Panels -->
+        <div class="tab-content">
+
+          <!-- ======== INTRODUCTION TAB ======== -->
+          <div class="tab-panel active" id="tab-introduction">
+            <div class="tab-grid tab-grid-intro">
+
+              <!-- Portrait (moved first) -->
+              <section class="card" id="section-portrait">
+                <div class="card-header">
+                  <span class="card-icon">🖼️</span>
+                  <h2>Portrait</h2>
+                </div>
+                <div class="card-body">
+                  <div class="portrait-placeholder" id="portrait-placeholder">
+                    <div class="portrait-frame">
+                      <span class="portrait-text">Click to add portrait</span>
+                      <input type="file" id="portrait-upload" accept="image/*" style="display: none;" />
+                      <img id="portrait-img" class="portrait-img" style="display: none;" />
                     </div>
                   </div>
                 </div>
-                <div class="armor-selector">
-                  <label for="armor-select">Armor Type</label>
-                  <select id="armor-select" class="select-ornate">
+              </section>
+
+              <!-- Character Info -->
+              <section class="card" id="section-info">
+                <div class="card-header">
+                  <span class="card-icon">👤</span>
+                  <h2>Character Info</h2>
+                </div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <label for="char-name">Name</label>
+                    <input type="text" id="char-name" placeholder="Enter character name..."
+                      class="input-ornate input-large" />
+                  </div>
+                  <div class="form-row">
+                    <label for="char-concept">Concept</label>
+                    <input type="text" id="char-concept" placeholder="A determined and foolhardy warrior..."
+                      class="input-ornate" />
+                  </div>
+                  <div class="form-row">
+                    <label for="char-short-goal">Short-Term Goal</label>
+                    <input type="text" id="char-short-goal" placeholder="Brief goal..." class="input-ornate" />
+                  </div>
+                  <div class="form-row">
+                    <label for="char-long-goal">Long-Term Goal</label>
+                    <input type="text" id="char-long-goal" placeholder="Brief goal..." class="input-ornate" />
+                  </div>
+                  <div class="form-row-group">
+                    <div class="form-row">
+                      <label for="char-age">Age</label>
+                      <input type="number" id="char-age" value="20" min="18" max="99"
+                        class="input-ornate input-small" />
+                    </div>
+                    <div class="form-row">
+                      <label for="char-gender">Gender</label>
+                      <input type="text" id="char-gender" placeholder="Gender..." class="input-ornate input-small" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Characteristics + Attributes + Special (compact) -->
+              <section class="card" id="section-stats">
+                <div class="card-header">
+                  <span class="card-icon">⚡</span>
+                  <h2>Characteristics</h2>
+                  <span class="points-badge" id="char-points-remaining">30 pts</span>
+                </div>
+                <div class="card-body card-body-compact">
+                  <div class="characteristics-grid" id="characteristics-grid">
                     <!-- Generated by JS -->
-                  </select>
+                  </div>
+
+                  <div class="subsection-header">
+                    <span class="card-icon">🛡️</span>
+                    <h3>Attributes</h3>
+                  </div>
+                  <div class="attributes-grid attributes-grid-2row">
+                    <div class="attr-item">
+                      <span class="attr-label">Hit Points</span>
+                      <span class="attr-value" id="attr-hp">8</span>
+                    </div>
+                    <div class="attr-item">
+                      <span class="attr-label">Power Points</span>
+                      <span class="attr-value" id="attr-pp">8</span>
+                    </div>
+                    <div class="attr-item">
+                      <span class="attr-label">Damage Modifier</span>
+                      <span class="attr-value" id="attr-dm">+0</span>
+                    </div>
+                    <div class="attr-item">
+                      <span class="attr-label">Combat Order</span>
+                      <span class="attr-value" id="attr-co">8</span>
+                    </div>
+                    <div class="attr-item">
+                      <span class="attr-label">Major Wound</span>
+                      <span class="attr-value" id="attr-mw">4</span>
+                    </div>
+                    <div class="attr-item">
+                      <span class="attr-label">Movement</span>
+                      <span class="attr-value"><input type="number" id="movement-rate" value="15" min="0"
+                          class="attr-input" /></span>
+                    </div>
+                  </div>
+
+                  <div class="section-divider"></div>
+
+                  <div class="special-row">
+                    <div class="attr-item attr-item-compact">
+                      <span class="attr-label">Hero Pts</span>
+                      <span class="attr-value"><input type="number" id="hero-points" value="2" min="0"
+                          class="attr-input" /></span>
+                    </div>
+                    <div class="attr-item attr-item-compact">
+                      <span class="attr-label">Improvement Pts</span>
+                      <span class="attr-value" id="ip-display">10</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+
+          <!-- ======== COMBAT TAB ======== -->
+          <div class="tab-panel" id="tab-combat">
+            <div class="tab-grid tab-grid-combat">
+
+              <!-- Close Combat Weapons -->
+              <section class="card" id="section-close-combat">
+                <div class="card-header">
+                  <span class="card-icon">⚔️</span>
+                  <h2>Close Combat Weapons</h2>
+                </div>
+                <div class="card-body">
+                  <div class="weapons-table" id="close-combat-weapons">
+                    <!-- Generated by JS -->
+                  </div>
+                </div>
+              </section>
+
+              <!-- Ranged Weapons -->
+              <section class="card" id="section-ranged">
+                <div class="card-header">
+                  <span class="card-icon">🏹</span>
+                  <h2>Ranged Weapons</h2>
+                </div>
+                <div class="card-body">
+                  <div class="weapons-table" id="ranged-weapons">
+                    <!-- Generated by JS -->
+                  </div>
+                </div>
+              </section>
+
+              <!-- Unarmed Combat -->
+              <section class="card" id="section-unarmed">
+                <div class="card-header">
+                  <span class="card-icon">👊</span>
+                  <h2>Unarmed Combat</h2>
+                </div>
+                <div class="card-body">
+                  <div class="weapons-table" id="unarmed-weapons">
+                    <!-- Generated by JS -->
+                  </div>
+                </div>
+              </section>
+
+              <!-- Armor -->
+              <section class="card" id="section-armor">
+                <div class="card-header">
+                  <span class="card-icon">🛡️</span>
+                  <h2>Armor</h2>
+                </div>
+                <div class="card-body">
+                  <div class="armor-display">
+                    <div class="armor-visual">
+                      <div class="armor-shield-graphic">
+                        <div class="shield-body">
+                          <div class="shield-type" id="armor-type-display">None</div>
+                          <div class="shield-ap" id="armor-ap-display">AP: 0</div>
+                          <div class="shield-enc" id="armor-enc-display">ENC: 0</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="armor-selector">
+                      <label for="armor-select">Armor Type</label>
+                      <select id="armor-select" class="select-ornate">
+                        <!-- Generated by JS -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Fatigue -->
+              <section class="card" id="section-fatigue">
+                <div class="card-header">
+                  <span class="card-icon">💤</span>
+                  <h2>Fatigue</h2>
+                </div>
+                <div class="card-body">
+                  <div class="fatigue-row">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="fatigued" />
+                      <span class="checkbox-custom"></span>
+                      Fatigued
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="exhausted" />
+                      <span class="checkbox-custom"></span>
+                      Exhausted
+                    </label>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+
+          <!-- ======== SKILLS TAB ======== -->
+          <div class="tab-panel" id="tab-skills">
+            <section class="card" id="section-skills">
+              <div class="card-header">
+                <span class="card-icon">📜</span>
+                <h2>Skills</h2>
+              </div>
+              <div class="card-body">
+                <div id="ip-converter">
+                  <!-- Generated by JS -->
+                </div>
+                <div class="skills-container" id="skills-container">
+                  <!-- Generated by JS -->
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          <!-- Fatigue -->
-          <section class="card" id="section-fatigue">
-            <div class="card-header">
-              <span class="card-icon">💤</span>
-              <h2>Fatigue</h2>
-            </div>
-            <div class="card-body">
-              <div class="fatigue-row">
-                <label class="checkbox-label">
-                  <input type="checkbox" id="fatigued" />
-                  <span class="checkbox-custom"></span>
-                  Fatigued
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" id="exhausted" />
-                  <span class="checkbox-custom"></span>
-                  Exhausted
-                </label>
+          <!-- ======== EQUIPMENT TAB ======== -->
+          <div class="tab-panel" id="tab-equipment">
+            <section class="card" id="section-equipment">
+              <div class="card-header">
+                <span class="card-icon">🎒</span>
+                <h2>Equipment</h2>
               </div>
+              <div class="card-body">
+                <div class="equipment-list" id="equipment-list">
+                  <!-- Generated by JS -->
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ======== DISCIPLINES TAB ======== -->
+          <div class="tab-panel" id="tab-disciplines">
+            <div class="tab-grid tab-grid-disciplines">
+
+              <!-- Disciplines -->
+              <section class="card" id="section-disciplines">
+                <div class="card-header">
+                  <span class="card-icon">✨</span>
+                  <h2>Disciplines</h2>
+                </div>
+                <div class="card-body">
+                  <div class="disciplines-list" id="disciplines-list">
+                    <!-- Generated by JS -->
+                  </div>
+                </div>
+              </section>
+
+              <!-- Powers -->
+              <section class="card" id="section-powers">
+                <div class="card-header">
+                  <span class="card-icon">🔮</span>
+                  <h2>Powers</h2>
+                </div>
+                <div class="card-body">
+                  <div class="powers-list" id="powers-list">
+                    <!-- Generated by JS -->
+                  </div>
+                </div>
+              </section>
+
             </div>
-          </section>
+          </div>
+
+          <!-- ======== OTHER TAB ======== -->
+          <div class="tab-panel" id="tab-other">
+            <div class="tab-grid tab-grid-other">
+
+              <!-- Wealth -->
+              <section class="card" id="section-wealth">
+                <div class="card-header">
+                  <span class="card-icon">💰</span>
+                  <h2>Wealth</h2>
+                </div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <label for="wealth-land">Land / Property</label>
+                    <input type="text" id="wealth-land" placeholder="" class="input-ornate" />
+                  </div>
+                  <div class="form-row">
+                    <label for="wealth-income">Income</label>
+                    <input type="text" id="wealth-income" placeholder="" class="input-ornate" />
+                  </div>
+                  <div class="form-row">
+                    <label for="wealth-coins">Coins</label>
+                    <input type="text" id="wealth-coins" placeholder="" class="input-ornate" />
+                  </div>
+                </div>
+              </section>
+
+              <!-- Relationships -->
+              <section class="card" id="section-relationships">
+                <div class="card-header">
+                  <span class="card-icon">🤝</span>
+                  <h2>Relationships</h2>
+                </div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <label for="rel-friends">Friends & Allies</label>
+                    <textarea id="rel-friends" rows="3" placeholder="Friends, allies, contacts..."
+                      class="input-ornate"></textarea>
+                  </div>
+                  <div class="form-row">
+                    <label for="rel-enemies">Enemies & Rivals</label>
+                    <textarea id="rel-enemies" rows="3" placeholder="Enemies, rivals, nemeses..."
+                      class="input-ornate"></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Background -->
+              <section class="card" id="section-background">
+                <div class="card-header">
+                  <span class="card-icon">📖</span>
+                  <h2>Background</h2>
+                </div>
+                <div class="card-body">
+                  <textarea id="char-background" rows="8" placeholder="Write your character's background story..."
+                    class="input-ornate textarea-large"></textarea>
+                </div>
+              </section>
+
+            </div>
+          </div>
 
         </div>
       </div>
 
-      <!-- ======== SKILLS TAB ======== -->
-      <div class="tab-panel" id="tab-skills">
-        <section class="card" id="section-skills">
-          <div class="card-header">
-            <span class="card-icon">📜</span>
-            <h2>Skills</h2>
-          </div>
-          <div class="card-body">
-            <div id="ip-converter">
-              <!-- Generated by JS -->
-            </div>
-            <div class="skills-container" id="skills-container">
-              <!-- Generated by JS -->
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ======== EQUIPMENT TAB ======== -->
-      <div class="tab-panel" id="tab-equipment">
-        <section class="card" id="section-equipment">
-          <div class="card-header">
-            <span class="card-icon">🎒</span>
-            <h2>Equipment</h2>
-          </div>
-          <div class="card-body">
-            <div class="equipment-list" id="equipment-list">
-              <!-- Generated by JS -->
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ======== DISCIPLINES TAB ======== -->
-      <div class="tab-panel" id="tab-disciplines">
-        <div class="tab-grid tab-grid-disciplines">
-
-          <!-- Disciplines -->
-          <section class="card" id="section-disciplines">
-            <div class="card-header">
-              <span class="card-icon">✨</span>
-              <h2>Disciplines</h2>
-            </div>
-            <div class="card-body">
-              <div class="disciplines-list" id="disciplines-list">
-                <!-- Generated by JS -->
-              </div>
-            </div>
-          </section>
-
-          <!-- Powers -->
-          <section class="card" id="section-powers">
-            <div class="card-header">
-              <span class="card-icon">🔮</span>
-              <h2>Powers</h2>
-            </div>
-            <div class="card-body">
-              <div class="powers-list" id="powers-list">
-                <!-- Generated by JS -->
-              </div>
-            </div>
-          </section>
-
+      <!-- MODULE: Skills Reference -->
+      <div id="module-skills" class="module">
+        <header class="module-header">
+          <h2>Skills Reference</h2>
+        </header>
+        <div class="module-content" id="content-skills">
+          <!-- Dynamic Content -->
         </div>
       </div>
 
-      <!-- ======== OTHER TAB ======== -->
-      <div class="tab-panel" id="tab-other">
-        <div class="tab-grid tab-grid-other">
+      <!-- MODULE: Equipment Reference -->
+      <div id="module-equipment" class="module">
+        <header class="module-header">
+          <h2>Equipment Reference</h2>
+        </header>
+        <div class="module-content" id="content-equipment">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
 
-          <!-- Wealth -->
-          <section class="card" id="section-wealth">
-            <div class="card-header">
-              <span class="card-icon">💰</span>
-              <h2>Wealth</h2>
-            </div>
-            <div class="card-body">
-              <div class="form-row">
-                <label for="wealth-land">Land / Property</label>
-                <input type="text" id="wealth-land" placeholder="" class="input-ornate" />
-              </div>
-              <div class="form-row">
-                <label for="wealth-income">Income</label>
-                <input type="text" id="wealth-income" placeholder="" class="input-ornate" />
-              </div>
-              <div class="form-row">
-                <label for="wealth-coins">Coins</label>
-                <input type="text" id="wealth-coins" placeholder="" class="input-ornate" />
-              </div>
-            </div>
-          </section>
+      <!-- MODULE: Combat Rules -->
+      <div id="module-combat" class="module">
+        <header class="module-header">
+          <h2>Combat Rules</h2>
+        </header>
+        <div class="module-content" id="content-combat">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
 
-          <!-- Relationships -->
-          <section class="card" id="section-relationships">
-            <div class="card-header">
-              <span class="card-icon">🤝</span>
-              <h2>Relationships</h2>
-            </div>
-            <div class="card-body">
-              <div class="form-row">
-                <label for="rel-friends">Friends & Allies</label>
-                <textarea id="rel-friends" rows="3" placeholder="Friends, allies, contacts..."
-                  class="input-ornate"></textarea>
-              </div>
-              <div class="form-row">
-                <label for="rel-enemies">Enemies & Rivals</label>
-                <textarea id="rel-enemies" rows="3" placeholder="Enemies, rivals, nemeses..."
-                  class="input-ornate"></textarea>
-              </div>
-            </div>
-          </section>
+      <!-- MODULE: Powers Reference -->
+      <div id="module-powers" class="module">
+        <header class="module-header">
+          <h2>Powers Reference</h2>
+        </header>
+        <div class="module-content" id="content-powers">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
 
-          <!-- Background -->
-          <section class="card" id="section-background">
-            <div class="card-header">
-              <span class="card-icon">📖</span>
-              <h2>Background</h2>
-            </div>
-            <div class="card-body">
-              <textarea id="char-background" rows="8" placeholder="Write your character's background story..."
-                class="input-ornate textarea-large"></textarea>
-            </div>
-          </section>
+      <!-- MODULE: Spot Rules -->
+      <div id="module-spot-rules" class="module">
+        <header class="module-header">
+          <h2>Spot Rules</h2>
+        </header>
+        <div class="module-content" id="content-spot-rules">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
 
+      <!-- MODULE: GM Tools -->
+      <div id="module-gm-tools" class="module">
+        <header class="module-header">
+          <h2>GM Tools</h2>
+        </header>
+        <div class="module-content" id="content-gm-tools">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+
+      <!-- MODULE: Monsters -->
+      <div id="module-monsters" class="module">
+        <header class="module-header">
+          <h2>Monsters</h2>
+        </header>
+        <div class="module-content" id="content-monsters">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+
+      <!-- MODULE: License -->
+      <div id="module-license" class="module">
+        <header class="module-header">
+          <h2>Open Game License</h2>
+        </header>
+        <div class="module-content" id="content-license">
+          <!-- Dynamic Content -->
         </div>
       </div>
 
     </main>
-
-    <footer class="app-footer">
-      <p>Fantasy Crux Character Generator &bull; Based on Fantasy Crux v1.4.1 by Konstantinos Karasavvas</p>
-    </footer>
   </div>
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="src/layout.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 
 </html>
