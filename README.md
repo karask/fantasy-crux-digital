@@ -1,1 +1,1 @@
-Character Generator for Fantasy Crux TTRPG
+Digital Tools for Fantasy Crux TTRPG
