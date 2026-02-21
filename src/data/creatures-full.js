@@ -2,6 +2,7 @@ export const FULL_CREATURES = [
     {
         "name": "Ant (Giant)",
         "description": "",
+        "image": "/assets/giant_ant.png",
         "attributes": {
             "hitpoints": "12",
             "majorwound": "6",
@@ -31,6 +32,7 @@ export const FULL_CREATURES = [
     {
         "name": "Bear",
         "description": "",
+        "image": "/assets/bear.png",
         "attributes": {
             "hitpoints": "19",
             "majorwound": "10",
@@ -60,6 +62,7 @@ export const FULL_CREATURES = [
     {
         "name": "Bull",
         "description": "",
+        "image": "/assets/bull.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -89,6 +92,7 @@ export const FULL_CREATURES = [
     {
         "name": "Crocodile",
         "description": "",
+        "image": "/assets/crocodile.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -118,6 +122,7 @@ export const FULL_CREATURES = [
     {
         "name": "Dog",
         "description": "",
+        "image": "/assets/dog.png",
         "attributes": {
             "hitpoints": "7",
             "majorwound": "4",
@@ -147,6 +152,7 @@ export const FULL_CREATURES = [
     {
         "name": "Elephant",
         "description": "",
+        "image": "/assets/elephant.png",
         "attributes": {
             "hitpoints": "36",
             "majorwound": "18",
@@ -176,6 +182,7 @@ export const FULL_CREATURES = [
     {
         "name": "Hawk",
         "description": "",
+        "image": "/assets/hawk.png",
         "attributes": {
             "hitpoints": "3",
             "majorwound": "2",
@@ -205,6 +212,7 @@ export const FULL_CREATURES = [
     {
         "name": "Hawk (Giant)",
         "description": "",
+        "image": "/assets/giant_hawk.png",
         "attributes": {
             "hitpoints": "36",
             "majorwound": "18",
@@ -234,6 +242,7 @@ export const FULL_CREATURES = [
     {
         "name": "Horse",
         "description": "",
+        "image": "/assets/horse.png",
         "attributes": {
             "hitpoints": "21",
             "majorwound": "11",
@@ -263,6 +272,7 @@ export const FULL_CREATURES = [
     {
         "name": "Lion (Big Cat)",
         "description": "",
+        "image": "/assets/lion.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -292,6 +302,7 @@ export const FULL_CREATURES = [
     {
         "name": "Lizard (Giant)",
         "description": "",
+        "image": "/assets/giant_lizard.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -321,6 +332,7 @@ export const FULL_CREATURES = [
     {
         "name": "Octupus (Giant)",
         "description": "",
+        "image": "/assets/giant_octopus.png",
         "attributes": {
             "hitpoints": "31",
             "majorwound": "16",
@@ -350,6 +362,7 @@ export const FULL_CREATURES = [
     {
         "name": "Python (Giant)",
         "description": "",
+        "image": "/assets/giant_python.png",
         "attributes": {
             "hitpoints": "11",
             "majorwound": "6",
@@ -379,6 +392,7 @@ export const FULL_CREATURES = [
     {
         "name": "Raven",
         "description": "",
+        "image": "/assets/raven.png",
         "attributes": {
             "hitpoints": "3",
             "majorwound": "2",
@@ -408,6 +422,7 @@ export const FULL_CREATURES = [
     {
         "name": "Rhinoceros",
         "description": "",
+        "image": "/assets/rhinoceros.png",
         "attributes": {
             "hitpoints": "19",
             "majorwound": "10",
@@ -437,6 +452,7 @@ export const FULL_CREATURES = [
     {
         "name": "Spider (Giant)",
         "description": "",
+        "image": "/assets/giant_spider.png",
         "attributes": {
             "hitpoints": "22",
             "majorwound": "11",
@@ -474,6 +490,7 @@ export const FULL_CREATURES = [
     {
         "name": "Viper",
         "description": "",
+        "image": "/assets/viper.png",
         "attributes": {
             "hitpoints": "7",
             "majorwound": "4",
@@ -507,6 +524,7 @@ export const FULL_CREATURES = [
     {
         "name": "Wolf",
         "description": "",
+        "image": "/assets/wolf.png",
         "attributes": {
             "hitpoints": "12",
             "majorwound": "6",

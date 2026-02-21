@@ -21,10 +21,8 @@ export function initSkillsModule() {
         <div class="card-body text-large">
           <h3 class="section-header-large">The Basic Skill Test</h3>
           <p>Roll D100 and compare to skill score. Equal to or less is a success.</p>
-          <ul>
-            <li><strong>Critical Success:</strong> Roll &le; 1/10th of skill (tens digit).</li>
-            <li><strong>Fumble:</strong> Roll 99 or 00. (If skill > 100%, only 00 is a fumble).</li>
-          </ul>
+          <p><strong>Critical Success:</strong> Roll &le; tens digit of skill.</p>
+          <p><strong>Fumble:</strong> Roll 99 or 00. (If skill > 100%, only 00 is a fumble).</p>
 
           <h3 class="section-header-large">Bonus & Penalty Dice</h3>
           <p><strong>Bonus Die (+1B):</strong> Roll 2D10 for tens, keep best. (e.g. roll 3, 8 for tens => 80).</p>

@@ -2,6 +2,7 @@
    Layout & Sidebar Logic
    ======================================== */
 
+import { initIntroductionModule } from './modules/introduction.js';
 import { initSkillsModule } from './modules/skills.js';
 import { initEquipmentModule } from './modules/equipment.js';
 import { initCombatModule } from './modules/combat.js';
@@ -13,11 +14,28 @@ import { initLicenseModule } from './modules/license.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebarNavigation();
+    initIntroductionModule();
 });
 
 function initSidebarNavigation() {
     const sidebarNav = document.querySelector('.sidebar-nav');
     if (!sidebarNav) return;
+
+    // Handle clicks on the Fantasy Crux title
+    const headerIntro = document.getElementById('sidebar-header-intro');
+    if (headerIntro) {
+        headerIntro.addEventListener('click', () => {
+            // Update Sidebar Active State
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+
+            // Switch Module View
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            const targetModule = document.getElementById('module-introduction');
+            if (targetModule) {
+                targetModule.classList.add('active');
+            }
+        });
+    }
 
     sidebarNav.addEventListener('click', (e) => {
         const btn = e.target.closest('.nav-item');

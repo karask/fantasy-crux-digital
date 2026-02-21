@@ -18,12 +18,12 @@
   <div id="app-layout">
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
-      <div class="sidebar-header">
+      <div class="sidebar-header" id="sidebar-header-intro" style="cursor: pointer;">
         <h1 class="sidebar-title">Fantasy Crux</h1>
         <p class="sidebar-subtitle">Digital Tools</p>
       </div>
       <nav class="sidebar-nav">
-        <button class="nav-item active" data-module="character-generator">
+        <button class="nav-item" data-module="character-generator">
           <span class="nav-icon">👤</span> Generator
         </button>
         <button class="nav-item" data-module="skills">
@@ -60,8 +60,20 @@
     <!-- Main Content Area -->
     <main class="main-content">
 
+      <!-- MODULE: Introduction (New Home Page) -->
+      <div id="module-introduction" class="module active">
+        <header class="module-header">
+          <div class="header-ornament left"></div>
+          <h2>Introduction</h2>
+          <div class="header-ornament right"></div>
+        </header>
+        <div class="module-content" id="content-introduction">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+
       <!-- MODULE: Character Generator (Existing Content) -->
-      <div id="module-character-generator" class="module active">
+      <div id="module-character-generator" class="module">
         <!-- Top Header (Local to Module) -->
         <header class="module-header">
           <div class="header-ornament left"></div>
@@ -455,7 +467,9 @@
       <!-- MODULE: Skills Reference -->
       <div id="module-skills" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Skills Reference</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-skills">
           <!-- Dynamic Content -->
@@ -465,7 +479,9 @@
       <!-- MODULE: Equipment Reference -->
       <div id="module-equipment" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Equipment Reference</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-equipment">
           <!-- Dynamic Content -->
@@ -475,7 +491,9 @@
       <!-- MODULE: Combat Rules -->
       <div id="module-combat" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Combat Rules</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-combat">
           <!-- Dynamic Content -->
@@ -485,7 +503,9 @@
       <!-- MODULE: Powers Reference -->
       <div id="module-powers" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Powers Reference</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-powers">
           <!-- Dynamic Content -->
@@ -495,7 +515,9 @@
       <!-- MODULE: Spot Rules -->
       <div id="module-spot-rules" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Spot Rules</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-spot-rules">
           <!-- Dynamic Content -->
@@ -505,7 +527,9 @@
       <!-- MODULE: GM Tools -->
       <div id="module-gm-tools" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>GM Tools</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-gm-tools">
           <!-- Dynamic Content -->
@@ -515,7 +539,9 @@
       <!-- MODULE: Monsters -->
       <div id="module-monsters" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Monsters</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-monsters">
           <!-- Dynamic Content -->
@@ -525,7 +551,9 @@
       <!-- MODULE: License -->
       <div id="module-license" class="module">
         <header class="module-header">
+          <div class="header-ornament left"></div>
           <h2>Open Game License</h2>
+          <div class="header-ornament right"></div>
         </header>
         <div class="module-content" id="content-license">
           <!-- Dynamic Content -->
