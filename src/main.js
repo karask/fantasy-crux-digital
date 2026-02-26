@@ -335,7 +335,7 @@ function renderCloseCombatWeapons() {
         </div>
         <div><input class="weapon-input" id="cc-damage-${i}" placeholder="—" readonly /></div>
         <div><input class="weapon-input" id="cc-enc-${i}" placeholder="—" readonly /></div>
-        <div><input class="weapon-input" id="cc-skill-${i}" placeholder="%" type="number" min="0" max="200" /></div>
+        <div><input class="weapon-input" id="cc-skill-${i}" placeholder="%" readonly /></div>
       </div>
     `;
   }
@@ -380,7 +380,7 @@ function renderRangedWeapons() {
         <div><input class="weapon-input" id="rw-range-${i}" placeholder="—" readonly /></div>
         <div><input class="weapon-input" id="rw-enc-${i}" placeholder="—" readonly /></div>
         <div><input class="weapon-input" id="rw-ammo-${i}" placeholder="0" type="number" min="0" /></div>
-        <div><input class="weapon-input" id="rw-skill-${i}" placeholder="%" type="number" min="0" max="200" /></div>
+        <div><input class="weapon-input" id="rw-skill-${i}" placeholder="%" readonly /></div>
       </div>
     `;
   }
@@ -425,7 +425,7 @@ function renderUnarmedWeapons() {
         <div><input class="weapon-input" id="ua-name-${i}" value="${unarmedNames[i]}" placeholder="Attack type..." /></div>
         <div><input class="weapon-input" id="ua-damage-${i}" value="${i === 0 ? '1D3' : ''}" placeholder="—" /></div>
         <div><input class="weapon-input" id="ua-enc-${i}" value="0" placeholder="—" /></div>
-        <div><input class="weapon-input" id="ua-skill-${i}" placeholder="%" type="number" min="0" max="200" /></div>
+        <div><input class="weapon-input" id="ua-skill-${i}" placeholder="%" readonly /></div>
       </div>
     `;
   }
@@ -555,6 +555,7 @@ function renderSkills() {
   });
 
   updateConverterDisplay();
+  syncWeaponSkills();
 }
 
 function onSkillBonusChange(e) {
