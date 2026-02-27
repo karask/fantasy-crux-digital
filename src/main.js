@@ -39,7 +39,11 @@ function getIPSpentOnAbilities() {
     const magEl = document.getElementById(`power-mag-${i}`);
     const nameEl = document.getElementById(`power-name-${i}`);
     if (nameEl && nameEl.value.trim() && magEl) {
-      spent += parseInt(magEl.value) || 0;
+      if (magEl.hasAttribute('data-cost-override')) {
+        spent += parseInt(magEl.getAttribute('data-cost-override')) || 0;
+      } else {
+        spent += parseInt(magEl.value) || 0;
+      }
     }
   }
   return spent;
@@ -747,16 +751,42 @@ function renderDisciplines() {
   }
 
   container.querySelectorAll('.select-ornate').forEach(sel => {
+    // Store previous value to revert if needed
+    sel.addEventListener('focus', function () {
+      this.setAttribute('data-prev', this.value);
+    });
+
     sel.addEventListener('change', (e) => {
       const idx = e.target.dataset.index;
       const opt = e.target.selectedOptions[0];
-      const cost = opt?.dataset.cost || '0';
-      document.getElementById(`disc-cost-${idx}`).textContent = `${cost} IP`;
+      const cost = parseInt(opt?.dataset.cost || '0');
+      const newDisc = e.target.value;
       const oldDisc = state.disciplineSelections[idx];
-      state.disciplineSelections[idx] = e.target.value;
+
+      // Temporarily revert the backend state to pretend we haven't selected yet
+      state.disciplineSelections[idx] = '';
+
+      const ipCurrentlyRemaining = getIPRemaining();
+
+      if (newDisc && ipCurrentlyRemaining < cost) {
+        // Revert UI to previous selection
+        const prevValue = e.target.getAttribute('data-prev') || '';
+        e.target.value = prevValue;
+
+        // Restore state to what it was
+        state.disciplineSelections[idx] = prevValue;
+
+        showToast('Not enough Improvement Points');
+        return;
+      }
+
+      // Valid selection, finalize the update
+      document.getElementById(`disc-cost-${idx}`).textContent = `${cost} IP`;
+      state.disciplineSelections[idx] = newDisc;
+      e.target.setAttribute('data-prev', newDisc);
 
       // If a discipline was removed, clear any powers that belonged to it
-      if (oldDisc && oldDisc !== e.target.value) {
+      if (oldDisc && oldDisc !== newDisc) {
         const stillActive = state.disciplineSelections.filter(d => d);
         // Only clear if no other slot still has this discipline
         if (!stillActive.includes(oldDisc)) {
@@ -764,10 +794,47 @@ function renderDisciplines() {
             const discEl = document.getElementById(`power-disc-${p}`);
             if (discEl && discEl.value === oldDisc) {
               document.getElementById(`power-name-${p}`).value = '';
-              document.getElementById(`power-mag-${p}`).value = '';
+              const magField = document.getElementById(`power-mag-${p}`);
+              magField.type = 'number';
+              magField.value = '';
+              magField.removeAttribute('data-cost-override');
+              magField.removeAttribute('data-min-mag');
+              magField.removeAttribute('data-prev-mag');
+              magField.readOnly = false;
               document.getElementById(`power-disc-${p}`).value = '';
               document.getElementById(`power-desc-${p}`).value = '';
             }
+          }
+        }
+      }
+
+      // If Arcane Magic was selected, grant Mystic Vision automatically for free
+      if (newDisc === 'Arcane Magic' && oldDisc !== 'Arcane Magic') {
+        const stillActive = state.disciplineSelections.filter(d => d);
+        // Ensure we don't grant it twice if they already have the discipline in another slot
+        if (stillActive.filter(d => d === 'Arcane Magic').length === 1) {
+          // Find first empty power slot
+          let emptyIdx = -1;
+          for (let p = 0; p < 20; p++) {
+            const nameEl = document.getElementById(`power-name-${p}`);
+            if (!nameEl.value) {
+              emptyIdx = p;
+              break;
+            }
+          }
+
+          if (emptyIdx !== -1) {
+            document.getElementById(`power-name-${emptyIdx}`).value = 'Mystic Vision';
+            const magField = document.getElementById(`power-mag-${emptyIdx}`);
+            magField.type = 'text';
+            magField.value = '—'; // display dash
+            magField.setAttribute('data-cost-override', 0); // Special flag for 0 IP cost
+            magField.readOnly = true;
+            document.getElementById(`power-disc-${emptyIdx}`).value = 'Arcane Magic';
+            // Getting description from ALL_POWERS if available, else generic
+            const mvPower = ALL_POWERS.find(p => p.name === 'Mystic Vision');
+            document.getElementById(`power-desc-${emptyIdx}`).value = mvPower ? mvPower.description : 'See magic auras.';
+            showToast('Mystic Vision acquired freely.');
           }
         }
       }
@@ -824,8 +891,60 @@ function renderPowers() {
 
   // Bind magnitude change events for IP tracking
   container.querySelectorAll('input[id^="power-mag-"]').forEach(input => {
-    input.addEventListener('change', updateIP);
-    input.addEventListener('input', updateIP);
+    // Store previous value before change
+    input.addEventListener('focus', function () {
+      this.setAttribute('data-prev-mag', this.value);
+    });
+
+    const handleMagChange = function (e) {
+      // Find the row index to check the discipline
+      const idx = this.id.split('-').pop();
+      const discField = document.getElementById(`power-disc-${idx}`);
+      if (discField && discField.value === 'Arcane Magic') {
+        showToast('Arcane Magic magnitudes are determined during casting.');
+        const oldMag = parseInt(this.getAttribute('data-prev-mag')) || parseInt(this.getAttribute('data-min-mag')) || 0;
+        this.value = oldMag;
+        return;
+      }
+
+      const minMag = parseInt(this.getAttribute('data-min-mag')) || 0;
+      let newMag = parseInt(this.value) || 0;
+      const oldMag = parseInt(this.getAttribute('data-prev-mag')) || 0;
+
+      // Cannot go below the spell's innate base cost
+      if (newMag < minMag) {
+        showToast(`Minimum magnitude for this power is ${minMag}`);
+        this.value = minMag;
+        newMag = minMag;
+      }
+
+      // Check for available points if increasing
+      if (newMag > oldMag) {
+        // Find how many extra points we're spending compared to before
+        const diff = newMag - oldMag;
+        const ipCurrentlyRemaining = getIPRemaining();
+        if (ipCurrentlyRemaining < 0) { // The logic here: if we already overspent, block it
+          // Wait, getIPRemaining calculates based on the current UI state!
+          // So it already factors in the new value if this is 'input' or 'change'.
+          // It's better to calculate IP before we accept the value.
+        }
+      }
+
+      // Safe update
+      this.setAttribute('data-prev-mag', newMag);
+      updateIP();
+
+      // If after updating UI, remaining falls below 0, it means we spent too much. Revert.
+      if (getIPRemaining() < 0) {
+        showToast('Not enough Improvement Points');
+        this.value = oldMag;
+        this.setAttribute('data-prev-mag', oldMag);
+        updateIP();
+      }
+    };
+
+    input.addEventListener('change', handleMagChange);
+    input.addEventListener('input', handleMagChange);
   });
 }
 
@@ -922,8 +1041,45 @@ function onPowerSearch(e) {
 
   dd.querySelectorAll('.power-dropdown-item').forEach(item => {
     item.addEventListener('mousedown', () => {
+      // Check if power belongs to Arcane Magic and adjust values
+      const isArcane = item.dataset.disc === 'Arcane Magic';
+      const actualMag = isArcane ? 2 : (parseInt(item.dataset.mag) || 0);
+
+      const incomingMag = actualMag;
+      const currentMagField = document.getElementById(`power-mag-${idx}`);
+      const oldMag = parseInt(currentMagField.value) || 0;
+
+      const ipCurrentlyRemaining = getIPRemaining();
+      const ipAvailForThisSlot = ipCurrentlyRemaining +
+        (currentMagField.hasAttribute('data-cost-override')
+          ? parseInt(currentMagField.getAttribute('data-cost-override') || 0)
+          : oldMag); // Refund old mag first
+
+      if (item.dataset.name && incomingMag > ipAvailForThisSlot) {
+        showToast('Not enough Improvement Points');
+        return; // Don't finalize selection
+      }
+
       e.target.value = item.dataset.name;
-      document.getElementById(`power-mag-${idx}`).value = item.dataset.mag;
+
+      // Lock Arcane Magic magnitudes and set text vs number
+      if (isArcane) {
+        currentMagField.type = 'text';
+        currentMagField.value = '—';
+        currentMagField.setAttribute('data-cost-override', actualMag);
+        currentMagField.readOnly = true;
+      } else {
+        currentMagField.type = 'number';
+        currentMagField.value = item.dataset.mag || '';
+        currentMagField.removeAttribute('data-cost-override');
+        // Store the true bare minimum cost for this magic power lock
+        currentMagField.setAttribute('data-min-mag', actualMag);
+        currentMagField.setAttribute('data-prev-mag', actualMag);
+        // Min HTML attribute so browsers respect step-downs limits visually
+        currentMagField.min = actualMag;
+        currentMagField.readOnly = false;
+      }
+
       document.getElementById(`power-disc-${idx}`).value = item.dataset.disc;
       document.getElementById(`power-desc-${idx}`).value = item.dataset.desc;
       dd.classList.remove('active');
@@ -957,7 +1113,46 @@ function bindGlobalEvents() {
   // Reset button
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Are you sure you want to reset all fields? This cannot be undone.')) {
-      location.reload();
+      // Reset State
+      state.characteristics = { STR: 8, CON: 8, DEX: 8, SIZ: 8, INT: 8, POW: 8, CHA: 8 };
+      state.armorIndex = 0;
+      state.skillBonuses = {};
+      state.genericSkillBonuses = {};
+      state.ipConvertedToSkills = 0;
+      state.equipmentItems = Array(20).fill({ name: '', enc: '' });
+      state.disciplineSelections = ['', '', ''];
+      state.powerEntries = Array(20).fill({ name: '', magnitude: '', discipline: '', description: '' });
+
+      // Clear all inputs in Character Generator module
+      const charMod = document.getElementById('module-character-generator');
+      charMod.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => {
+        // Leave min/max constrained fields alone if we already rerender them 
+        // Or just clear them and let render cycles fill defaults
+        el.value = '';
+      });
+      charMod.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+      charMod.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+
+      // Reset specific defaults
+      document.getElementById('char-age').value = 20;
+      document.getElementById('movement-rate').value = 15;
+      document.getElementById('hero-points').value = 2;
+
+      // Portrait
+      portraitImg.src = '';
+      portraitImg.style.display = 'none';
+      portraitText.style.display = 'block';
+
+      // Rerender UI
+      renderCharacteristics();
+      updateArmorDisplay();
+      updateDerivedAttributes();
+      renderSkills();
+      renderWeapons();
+      renderEquipment();
+      renderDisciplines();
+      renderPowers();
+      updateIP();
     }
   });
 
@@ -965,7 +1160,224 @@ function bindGlobalEvents() {
   document.getElementById('btn-export-pdf').addEventListener('click', () => {
     exportPDF();
   });
+
+  // Save JSON
+  document.getElementById('btn-save-json').addEventListener('click', saveCharacter);
+
+  // Load JSON
+  const uploadJson = document.getElementById('upload-json');
+  document.getElementById('btn-load-json').addEventListener('click', () => uploadJson.click());
+  uploadJson.addEventListener('change', loadCharacter);
 }
+
+// ============ SAVE / LOAD JSON ============
+function saveCharacter() {
+  const charData = {
+    version: '1.0',
+    state: state,
+    basics: {
+      name: document.getElementById('char-name').value,
+      concept: document.getElementById('char-concept').value,
+      shortGoal: document.getElementById('char-short-goal').value,
+      longGoal: document.getElementById('char-long-goal').value,
+      age: document.getElementById('char-age').value,
+      gender: document.getElementById('char-gender').value,
+      movement: document.getElementById('movement-rate').value,
+      heroPoints: document.getElementById('hero-points').value,
+      background: document.getElementById('char-background').value
+    },
+    wealth: {
+      land: document.getElementById('wealth-land').value,
+      income: document.getElementById('wealth-income').value,
+      coins: document.getElementById('wealth-coins').value,
+      friends: document.getElementById('rel-friends').value,
+      enemies: document.getElementById('rel-enemies').value
+    },
+    combat: {
+      fatigue: document.getElementById('fatigued').checked,
+      exhausted: document.getElementById('exhausted').checked,
+      closeWeapons: [],
+      rangedWeapons: [],
+      unarmedWeapons: []
+    },
+    equipment: [],
+    powers: []
+  };
+
+  // Close Combat
+  for (let i = 0; i < 4; i++) {
+    charData.combat.closeWeapons.push(document.getElementById(`cc-weapon-${i}`).value);
+  }
+  // Ranged Weapons
+  for (let i = 0; i < 4; i++) {
+    charData.combat.rangedWeapons.push({
+      name: document.getElementById(`rw-weapon-${i}`).value,
+      ammo: document.getElementById(`rw-ammo-${i}`).value
+    });
+  }
+  // Unarmed
+  for (let i = 0; i < 3; i++) {
+    charData.combat.unarmedWeapons.push({
+      name: document.getElementById(`ua-name-${i}`).value,
+      damage: document.getElementById(`ua-damage-${i}`).value,
+      enc: document.getElementById(`ua-enc-${i}`).value
+    });
+  }
+  // Equipment
+  for (let i = 0; i < 20; i++) {
+    charData.equipment.push({
+      name: document.getElementById(`equip-name-${i}`).value,
+      enc: document.getElementById(`equip-enc-${i}`).value
+    });
+  }
+  // Powers
+  for (let i = 0; i < 20; i++) {
+    charData.powers.push({
+      name: document.getElementById(`power-name-${i}`).value,
+      mag: document.getElementById(`power-mag-${i}`).value,
+      disc: document.getElementById(`power-disc-${i}`).value,
+      desc: document.getElementById(`power-desc-${i}`).value
+    });
+  }
+
+  // Portrait Data URL
+  const portraitImg = document.getElementById('portrait-img');
+  charData.portrait = (portraitImg.style.display !== 'none') ? portraitImg.src : null;
+
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(charData, null, 2));
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  const fileName = charData.basics.name ? `${charData.basics.name.toLowerCase().replace(/\\s+/g, '_')}.json` : "character.json";
+  downloadAnchorNode.setAttribute("download", fileName);
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
+function loadCharacter(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+
+      // Restore state
+      if (data.state) {
+        Object.assign(state, data.state);
+      }
+
+      // Restore Basics
+      if (data.basics) {
+        document.getElementById('char-name').value = data.basics.name || '';
+        document.getElementById('char-concept').value = data.basics.concept || '';
+        document.getElementById('char-short-goal').value = data.basics.shortGoal || '';
+        document.getElementById('char-long-goal').value = data.basics.longGoal || '';
+        document.getElementById('char-age').value = data.basics.age || 20;
+        document.getElementById('char-gender').value = data.basics.gender || '';
+        document.getElementById('movement-rate').value = data.basics.movement || 15;
+        document.getElementById('hero-points').value = data.basics.heroPoints || 2;
+        document.getElementById('char-background').value = data.basics.background || '';
+      }
+
+      // Restore Wealth & Relationships
+      if (data.wealth) {
+        document.getElementById('wealth-land').value = data.wealth.land || '';
+        document.getElementById('wealth-income').value = data.wealth.income || '';
+        document.getElementById('wealth-coins').value = data.wealth.coins || '';
+        document.getElementById('rel-friends').value = data.wealth.friends || '';
+        document.getElementById('rel-enemies').value = data.wealth.enemies || '';
+      }
+
+      // Restore Combat (Checkbox and arrays)
+      if (data.combat) {
+        document.getElementById('fatigued').checked = !!data.combat.fatigue;
+        document.getElementById('exhausted').checked = !!data.combat.exhausted;
+
+        (data.combat.closeWeapons || []).forEach((w, i) => {
+          if (i < 4) {
+            const select = document.getElementById(`cc-weapon-${i}`);
+            select.value = w || '';
+            select.dispatchEvent(new Event('change'));
+          }
+        });
+        (data.combat.rangedWeapons || []).forEach((w, i) => {
+          if (i < 4) {
+            const select = document.getElementById(`rw-weapon-${i}`);
+            select.value = w.name || '';
+            document.getElementById(`rw-ammo-${i}`).value = w.ammo || '';
+            select.dispatchEvent(new Event('change'));
+          }
+        });
+        (data.combat.unarmedWeapons || []).forEach((w, i) => {
+          if (i < 3) {
+            document.getElementById(`ua-name-${i}`).value = w.name || '';
+            document.getElementById(`ua-damage-${i}`).value = w.damage || '';
+            document.getElementById(`ua-enc-${i}`).value = w.enc || '';
+          }
+        });
+      }
+
+      // Restore Equipment
+      (data.equipment || []).forEach((eq, i) => {
+        if (i < 20) {
+          document.getElementById(`equip-name-${i}`).value = eq.name || '';
+          document.getElementById(`equip-enc-${i}`).value = eq.enc || '';
+        }
+      });
+      updateTotalEnc();
+
+      // Restore Powers
+      (data.powers || []).forEach((p, i) => {
+        if (i < 20) {
+          document.getElementById(`power-name-${i}`).value = p.name || '';
+          document.getElementById(`power-mag-${i}`).value = p.mag || '';
+          document.getElementById(`power-disc-${i}`).value = p.disc || '';
+          document.getElementById(`power-desc-${i}`).value = p.desc || '';
+        }
+      });
+
+      // Restore Portrait
+      const portraitPlaceholder = document.getElementById('portrait-placeholder');
+      const portraitImg = document.getElementById('portrait-img');
+      const portraitText = document.querySelector('.portrait-text');
+      if (data.portrait) {
+        portraitImg.src = data.portrait;
+        portraitImg.style.display = 'block';
+        portraitText.style.display = 'none';
+      } else {
+        portraitImg.style.display = 'none';
+        portraitText.style.display = 'block';
+        portraitImg.src = '';
+      }
+
+      // Re-trigger Rendering to Sync UI with restored `state` object
+      renderCharacteristics();
+      document.getElementById('armor-select').value = state.armorIndex;
+      updateArmorDisplay();
+      updateDerivedAttributes();
+
+      // Update Disciplines Dropdowns
+      for (let i = 0; i < 3; i++) {
+        const sel = document.getElementById(`disc-select-${i}`);
+        sel.value = state.disciplineSelections[i] || '';
+        sel.dispatchEvent(new Event('change'));
+      }
+
+      renderSkills();
+      updateIP();
+
+      alert('Character loaded successfully!');
+    } catch (err) {
+      alert('Error loading character file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = ''; // Reset file input so same file can be loaded again if needed
+}
+
+// ============ UTILITIES ============
 
 // ============ PDF EXPORT (Continuous flow, skip empties) ============
 async function exportPDF() {

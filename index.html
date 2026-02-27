@@ -83,11 +83,18 @@
 
         <!-- Action Bar -->
         <div class="action-bar">
-          <button id="btn-export-pdf" class="btn btn-gold" title="Export character to PDF booklet">
-            <span class="btn-icon">📜</span> Export to PDF
-          </button>
           <button id="btn-reset" class="btn btn-danger" title="Reset all fields">
             <span class="btn-icon">🔄</span> New Character
+          </button>
+          <button id="btn-load-json" class="btn" title="Load character from a JSON file">
+            <span class="btn-icon">📂</span> Load
+          </button>
+          <button id="btn-save-json" class="btn" title="Save character to a JSON file">
+            <span class="btn-icon">💾</span> Save
+          </button>
+          <input type="file" id="upload-json" accept=".json" style="display: none;" />
+          <button id="btn-export-pdf" class="btn btn-gold" title="Export character to PDF booklet">
+            <span class="btn-icon">📜</span> Export to PDF
           </button>
         </div>
 
