@@ -17,6 +17,7 @@ const state = {
   armorIndex: 0,
   skillBonuses: {},
   genericSkillBonuses: {},
+  skillEntries: {},
   ipConvertedToSkills: 0,
   equipmentItems: Array(20).fill({ name: '', enc: '' }),
   disciplineSelections: ['', '', ''],
@@ -231,25 +232,28 @@ function renderCharacteristics() {
     grid.appendChild(div);
   });
 
-  grid.addEventListener('click', (e) => {
-    if (e.target.classList.contains('char-btn')) {
-      const char = e.target.dataset.char;
-      const dir = parseInt(e.target.dataset.dir);
-      adjustCharacteristic(char, dir);
-    }
-  });
+  if (!grid.dataset.listenersBound) {
+    grid.addEventListener('click', (e) => {
+      if (e.target.classList.contains('char-btn')) {
+        const char = e.target.dataset.char;
+        const dir = parseInt(e.target.dataset.dir);
+        adjustCharacteristic(char, dir);
+      }
+    });
 
-  grid.addEventListener('change', (e) => {
-    if (e.target.classList.contains('char-value')) {
-      const char = e.target.dataset.char;
-      let val = parseInt(e.target.value) || CHAR_START_VALUE;
-      val = Math.max(CHAR_MIN_VALUES[char], Math.min(CHAR_MAX_VALUE, val));
-      state.characteristics[char] = val;
-      e.target.value = val;
-      updateDerivedAttributes();
-      renderSkills();
-    }
-  });
+    grid.addEventListener('change', (e) => {
+      if (e.target.classList.contains('char-value')) {
+        const char = e.target.dataset.char;
+        let val = parseInt(e.target.value) || CHAR_START_VALUE;
+        val = Math.max(CHAR_MIN_VALUES[char], Math.min(CHAR_MAX_VALUE, val));
+        state.characteristics[char] = val;
+        e.target.value = val;
+        updateDerivedAttributes();
+        renderSkills();
+      }
+    });
+    grid.dataset.listenersBound = 'true';
+  }
 }
 
 function adjustCharacteristic(char, dir) {
@@ -505,11 +509,12 @@ function renderSkills() {
           totalSpent += catBonus;
           const total = base + catBonus + genBonus;
 
+          const entryVal = state.skillEntries[key] || '';
           skillHTML.push(`
             <div class="skill-row">
               <span class="skill-name">${skill.entryLabel || skill.name}:
                 <input type="text" class="skill-name-input" id="skill-entry-${key}" 
-                       placeholder="specify..." data-key="${key}" />
+                       value="${entryVal}" placeholder="specify..." data-key="${key}" />
               </span>
               <span class="skill-base">${base}%</span>
               <input type="number" class="skill-bonus-input" id="skill-bonus-${key}" 
@@ -556,6 +561,15 @@ function renderSkills() {
   container.querySelectorAll('.skill-bonus-input').forEach(input => {
     input.addEventListener('change', onSkillBonusChange);
     input.addEventListener('input', onSkillBonusChange);
+  });
+
+  // Bind skill entry change events
+  container.querySelectorAll('.skill-name-input').forEach(input => {
+    const updateEntry = (e) => {
+      state.skillEntries[e.target.dataset.key] = e.target.value;
+    };
+    input.addEventListener('change', updateEntry);
+    input.addEventListener('input', updateEntry);
   });
 
   updateConverterDisplay();
@@ -1118,6 +1132,7 @@ function bindGlobalEvents() {
       state.armorIndex = 0;
       state.skillBonuses = {};
       state.genericSkillBonuses = {};
+      state.skillEntries = {};
       state.ipConvertedToSkills = 0;
       state.equipmentItems = Array(20).fill({ name: '', enc: '' });
       state.disciplineSelections = ['', '', ''];
@@ -1265,7 +1280,21 @@ function loadCharacter(e) {
 
       // Restore state
       if (data.state) {
+        // Reset state first to avoid bleed from previous character
+        Object.assign(state, {
+          characteristics: { STR: 8, CON: 8, DEX: 8, SIZ: 8, INT: 8, POW: 8, CHA: 8 },
+          armorIndex: 0,
+          skillBonuses: {},
+          genericSkillBonuses: {},
+          skillEntries: {},
+          ipConvertedToSkills: 0,
+          equipmentItems: Array(20).fill({ name: '', enc: '' }),
+          disciplineSelections: ['', '', ''],
+          powerEntries: Array(20).fill({ name: '', magnitude: '', discipline: '', description: '' })
+        });
         Object.assign(state, data.state);
+        // Ensure missing sub-objects are initialized if data.state missed them
+        if (!state.skillEntries) state.skillEntries = {};
       }
 
       // Restore Basics
