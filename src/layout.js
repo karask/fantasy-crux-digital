@@ -11,6 +11,7 @@ import { initSpotRulesModule } from './modules/spot-rules.js';
 import { initGMToolsModule } from './modules/gm-tools.js';
 import { initCreaturesModule } from './modules/creatures.js';
 import { initLicenseModule } from './modules/license.js';
+import { initDownloadsModule } from './modules/downloads.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebarNavigation();
@@ -63,6 +64,7 @@ function initSidebarNavigation() {
                 case 'gm-tools': initGMToolsModule(); break;
                 case 'monsters': initCreaturesModule(); break; // Maps 'monsters' to 'creatures' implementation
                 case 'license': initLicenseModule(); break;
+                case 'downloads': initDownloadsModule(); break;
             }
         }
     });
