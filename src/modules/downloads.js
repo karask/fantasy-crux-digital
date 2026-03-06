@@ -59,7 +59,7 @@ export function initDownloadsModule() {
 
           <div class="download-card" style="border: 1px solid var(--border-gold); border-radius: 8px; padding: 1.5rem; text-align: center; background: rgba(30, 30, 48, 0.4);">
             <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📋</div>
-            <h3 style="color: var(--text-highlight); margin-bottom: 0.5rem;">Plain Text</h3>
+            <h3 style="color: var(--text-highlight); margin-bottom: 0.5rem;">Plain</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Barebones utilitarian sheet.</p>
             <a href="/downloads/character-sheet.pdf" download class="btn" style="display: inline-block; width: 100%; text-decoration: none; border-color: #666;">Download</a>
           </div>
