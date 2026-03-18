@@ -1421,7 +1421,8 @@ async function exportPDF() {
   // Colors
   const gold = [201, 169, 92];
   const dark = [30, 30, 48];
-  const parchment = [245, 230, 200];
+  const parchment = [255, 255, 255];
+  //const parchment = [245, 230, 200];
   const textDark = [42, 34, 24];
   const textGold = [180, 150, 70];
 
