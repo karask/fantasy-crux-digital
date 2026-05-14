@@ -701,7 +701,7 @@ export const FULL_CREATURES = [
             },
             {
                 "name": "Breathe Flame",
-                "description": "The Dragon may breathe flame over an area as a Combat Action. The flame will cover a cone in front of the Dragon, which stretches for its POW in metres. At its furthest extent, the cone is equal to the creature’s POW in width. Any creature caught in the flame suffers 4D6 fire damage, though on a successful Dodge roll a character may dive for cover to halve this damage and AP counts as normal. The Dragon may only breathe flame once per hour. Further attempts to breathe flame within this time period require the creature to make a Resilience test, with a cumulative –20% penalty for every attempt."
+                "description": "The Dragon may breathe flame over an area as a Combat Action. The flame will cover a cone in front of the Dragon, which stretches for its POW in metres. At its furthest extent, the cone is equal to the creature’s POW in width. Any creature caught in the flame suffers 4D6 fire damage, though on a successful Dodge roll a character may dive for cover to halve this damage and AP counts as normal. The Dragon may only breathe flame once per hour. Further attempts to breathe flame within this time period require the creature to make a Resilience test, with a cumulative penalty die for every attempt."
             },
             {
                 "name": "Resist Fire",
