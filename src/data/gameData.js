@@ -215,6 +215,7 @@ export const DISCIPLINES = [
 
 // =========== BATTLE TECHNIQUES ===========
 export const BATTLE_TECHNIQUES = [
+    { name: 'Ambidextrous', magnitude: 1, discipline: 'Battle', description: 'Attack with an off-hand weapon has no penalty.' },
     { name: 'Awareness', magnitude: 3, discipline: 'Battle', description: 'Opponent cannot gain flanking bonus for 3 combat rounds.' },
     { name: 'Combat Focus', magnitude: 2, discipline: 'Battle', description: 'Close combat attack with Bonus die (+1B).' },
     { name: 'Combat Mastery', magnitude: 3, discipline: 'Battle', description: 'Close combat attack with Bonus die (+1B) and +2 damage.' },

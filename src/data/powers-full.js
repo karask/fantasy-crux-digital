@@ -1,5 +1,11 @@
 export const FULL_POWERS = [
     {
+        "name": "Ambidextrous",
+        "type": "Battle",
+        "magnitude": "1",
+        "description": "Allows the warrior to make an attack with an off-hand weapon without any penalty."
+    },
+    {
         "name": "Awareness",
         "type": "Battle",
         "magnitude": "3",
