@@ -18,14 +18,14 @@ export function initDownloadsModule() {
             <div style="font-size: 3rem; margin-bottom: 0.5rem;">📜</div>
             <h3 style="color: var(--text-highlight); margin-bottom: 0.5rem;">Papyrous Edition</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Full thematic background, ideal for digital reading.</p>
-            <a href="/downloads/FC-v1.4.1-papyrous.pdf" download class="btn btn-gold" style="display: inline-block; width: 100%; text-decoration: none;">Download PDF</a>
+            <a href="/downloads/FC-v1.4.2-papyrous.pdf" download class="btn btn-gold" style="display: inline-block; width: 100%; text-decoration: none;">Download PDF</a>
           </div>
 
           <div class="download-card" style="border: 1px solid var(--border-gold); border-radius: 8px; padding: 1.5rem; text-align: center; background: rgba(30, 30, 48, 0.4);">
             <div style="font-size: 3rem; margin-bottom: 0.5rem;">🖨️</div>
             <h3 style="color: var(--text-highlight); margin-bottom: 0.5rem;">Printer Friendly</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Clean white background to save your ink.</p>
-            <a href="/downloads/FC-v1.4.1-printer.pdf" download class="btn" style="display: inline-block; width: 100%; text-decoration: none;">Download PDF</a>
+            <a href="/downloads/FC-v1.4.2-printer.pdf" download class="btn" style="display: inline-block; width: 100%; text-decoration: none;">Download PDF</a>
           </div>
 
           <div class="download-card" style="border: 1px solid var(--border-gold); border-radius: 8px; padding: 1.5rem; text-align: center; background: rgba(30, 30, 48, 0.4);">
