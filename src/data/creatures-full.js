@@ -2,7 +2,7 @@ export const FULL_CREATURES = [
     {
         "name": "Ant (Giant)",
         "description": "",
-        "image": "/assets/giant_ant.png",
+        "image": "assets/giant_ant.png",
         "attributes": {
             "hitpoints": "12",
             "majorwound": "6",
@@ -32,7 +32,7 @@ export const FULL_CREATURES = [
     {
         "name": "Bear",
         "description": "",
-        "image": "/assets/bear.png",
+        "image": "assets/bear.png",
         "attributes": {
             "hitpoints": "19",
             "majorwound": "10",
@@ -62,7 +62,7 @@ export const FULL_CREATURES = [
     {
         "name": "Bull",
         "description": "",
-        "image": "/assets/bull.png",
+        "image": "assets/bull.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -92,7 +92,7 @@ export const FULL_CREATURES = [
     {
         "name": "Crocodile",
         "description": "",
-        "image": "/assets/crocodile.png",
+        "image": "assets/crocodile.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -122,7 +122,7 @@ export const FULL_CREATURES = [
     {
         "name": "Dog",
         "description": "",
-        "image": "/assets/dog.png",
+        "image": "assets/dog.png",
         "attributes": {
             "hitpoints": "7",
             "majorwound": "4",
@@ -152,7 +152,7 @@ export const FULL_CREATURES = [
     {
         "name": "Elephant",
         "description": "",
-        "image": "/assets/elephant.png",
+        "image": "assets/elephant.png",
         "attributes": {
             "hitpoints": "36",
             "majorwound": "18",
@@ -182,7 +182,7 @@ export const FULL_CREATURES = [
     {
         "name": "Hawk",
         "description": "",
-        "image": "/assets/hawk.png",
+        "image": "assets/hawk.png",
         "attributes": {
             "hitpoints": "3",
             "majorwound": "2",
@@ -212,7 +212,7 @@ export const FULL_CREATURES = [
     {
         "name": "Hawk (Giant)",
         "description": "",
-        "image": "/assets/giant_hawk.png",
+        "image": "assets/giant_hawk.png",
         "attributes": {
             "hitpoints": "36",
             "majorwound": "18",
@@ -242,7 +242,7 @@ export const FULL_CREATURES = [
     {
         "name": "Horse",
         "description": "",
-        "image": "/assets/horse.png",
+        "image": "assets/horse.png",
         "attributes": {
             "hitpoints": "21",
             "majorwound": "11",
@@ -272,7 +272,7 @@ export const FULL_CREATURES = [
     {
         "name": "Lion (Big Cat)",
         "description": "",
-        "image": "/assets/lion.png",
+        "image": "assets/lion.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -302,7 +302,7 @@ export const FULL_CREATURES = [
     {
         "name": "Lizard (Giant)",
         "description": "",
-        "image": "/assets/giant_lizard.png",
+        "image": "assets/giant_lizard.png",
         "attributes": {
             "hitpoints": "15",
             "majorwound": "8",
@@ -332,7 +332,7 @@ export const FULL_CREATURES = [
     {
         "name": "Octupus (Giant)",
         "description": "",
-        "image": "/assets/giant_octopus.png",
+        "image": "assets/giant_octopus.png",
         "attributes": {
             "hitpoints": "31",
             "majorwound": "16",
@@ -362,7 +362,7 @@ export const FULL_CREATURES = [
     {
         "name": "Python (Giant)",
         "description": "",
-        "image": "/assets/giant_python.png",
+        "image": "assets/giant_python.png",
         "attributes": {
             "hitpoints": "11",
             "majorwound": "6",
@@ -392,7 +392,7 @@ export const FULL_CREATURES = [
     {
         "name": "Raven",
         "description": "",
-        "image": "/assets/raven.png",
+        "image": "assets/raven.png",
         "attributes": {
             "hitpoints": "3",
             "majorwound": "2",
@@ -422,7 +422,7 @@ export const FULL_CREATURES = [
     {
         "name": "Rhinoceros",
         "description": "",
-        "image": "/assets/rhinoceros.png",
+        "image": "assets/rhinoceros.png",
         "attributes": {
             "hitpoints": "19",
             "majorwound": "10",
@@ -452,7 +452,7 @@ export const FULL_CREATURES = [
     {
         "name": "Spider (Giant)",
         "description": "",
-        "image": "/assets/giant_spider.png",
+        "image": "assets/giant_spider.png",
         "attributes": {
             "hitpoints": "22",
             "majorwound": "11",
@@ -490,7 +490,7 @@ export const FULL_CREATURES = [
     {
         "name": "Viper",
         "description": "",
-        "image": "/assets/viper.png",
+        "image": "assets/viper.png",
         "attributes": {
             "hitpoints": "7",
             "majorwound": "4",
@@ -524,7 +524,7 @@ export const FULL_CREATURES = [
     {
         "name": "Wolf",
         "description": "",
-        "image": "/assets/wolf.png",
+        "image": "assets/wolf.png",
         "attributes": {
             "hitpoints": "12",
             "majorwound": "6",
@@ -604,7 +604,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/basilisk.png"
+        "image": "assets/basilisk.png"
     },
     {
         "name": "Beastman",
@@ -655,7 +655,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/wolfman.png"
+        "image": "assets/wolfman.png"
     },
     {
         "name": "Dragon",
@@ -714,7 +714,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/dragon.png"
+        "image": "assets/dragon.png"
     },
     {
         "name": "Dwarf",
@@ -773,7 +773,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/dwarf.png"
+        "image": "assets/dwarf.png"
     },
     {
         "name": "Elemental",
@@ -886,7 +886,7 @@ export const FULL_CREATURES = [
                 ]
             }
         ],
-        "image": "/assets/water-elemental.png"
+        "image": "assets/water-elemental.png"
     },
     {
         "name": "Elf",
@@ -945,7 +945,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/elf.png"
+        "image": "assets/elf.png"
     },
     {
         "name": "Gargoyle",
@@ -992,7 +992,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/gargoyle.png"
+        "image": "assets/gargoyle.png"
     },
     {
         "name": "Giant",
@@ -1051,7 +1051,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/giant.png"
+        "image": "assets/giant.png"
     },
     {
         "name": "Goblin",
@@ -1106,7 +1106,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/goblin.png"
+        "image": "assets/goblin.png"
     },
     {
         "name": "Golem",
@@ -1157,7 +1157,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/golem.png"
+        "image": "assets/golem.png"
     },
     {
         "name": "Griffin",
@@ -1200,7 +1200,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/griffin.png"
+        "image": "assets/griffin.png"
     },
     {
         "name": "Harpy",
@@ -1263,7 +1263,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/harpy.png"
+        "image": "assets/harpy.png"
     },
     {
         "name": "Merfolk",
@@ -1314,7 +1314,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/merfolk.png"
+        "image": "assets/merfolk.png"
     },
     {
         "name": "Sea Serpent",
@@ -1353,7 +1353,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/sea-serpent.png"
+        "image": "assets/sea-serpent.png"
     },
     {
         "name": "Holy Steed",
@@ -1388,7 +1388,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/holy-steed.png"
+        "image": "assets/holy-steed.png"
     },
     {
         "name": "Holy Warrior",
@@ -1427,7 +1427,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/holy-warrior.png"
+        "image": "assets/holy-warrior.png"
     },
     {
         "name": "Lizardman",
@@ -1482,7 +1482,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/lizardman.png"
+        "image": "assets/lizardman.png"
     },
     {
         "name": "Ogre",
@@ -1537,7 +1537,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/ogre.png"
+        "image": "assets/ogre.png"
     },
     {
         "name": "Orc",
@@ -1588,7 +1588,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/orc.png"
+        "image": "assets/orc.png"
     },
     {
         "name": "Pixie",
@@ -1639,7 +1639,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/pixie.png"
+        "image": "assets/pixie.png"
     },
     {
         "name": "Troll",
@@ -1694,7 +1694,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/troll.png"
+        "image": "assets/troll.png"
     },
     {
         "name": "Werewolf",
@@ -1761,7 +1761,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/werewolf.png"
+        "image": "assets/werewolf.png"
     },
     {
         "name": "Wyvern",
@@ -1808,7 +1808,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/wyvern.png"
+        "image": "assets/wyvern.png"
     },
     {
         "name": "Dryad",
@@ -1863,7 +1863,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/dryad.png"
+        "image": "assets/dryad.png"
     },
     {
         "name": "Hag",
@@ -1918,7 +1918,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/hag.png"
+        "image": "assets/hag.png"
     },
     {
         "name": "Naiad",
@@ -1977,7 +1977,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/naiad.png"
+        "image": "assets/naiad.png"
     },
     {
         "name": "Oread",
@@ -2036,7 +2036,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/oread.png"
+        "image": "assets/oread.png"
     },
     {
         "name": "Ancestor Spirit",
@@ -2083,7 +2083,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/ancestor-spirit.png"
+        "image": "assets/ancestor-spirit.png"
     },
     {
         "name": "Disease Spirit",
@@ -2126,7 +2126,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/disease-spirit.png"
+        "image": "assets/disease-spirit.png"
     },
     {
         "name": "Ghost",
@@ -2174,7 +2174,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/ghost.jpeg"
+        "image": "assets/ghost.jpeg"
     },
     {
         "name": "Guardian Spirit",
@@ -2209,7 +2209,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/guardian-spirit.png"
+        "image": "assets/guardian-spirit.png"
     },
     {
         "name": "Healing Spirit",
@@ -2252,7 +2252,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/healing-spirit.png"
+        "image": "assets/healing-spirit.png"
     },
     {
         "name": "Magic Spirit",
@@ -2291,7 +2291,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/magic-spirit.png"
+        "image": "assets/magic-spirit.png"
     },
     {
         "name": "Passion Spirit",
@@ -2338,7 +2338,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/passion-spirit.png"
+        "image": "assets/passion-spirit.png"
     },
     {
         "name": "Ghoul",
@@ -2393,7 +2393,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/ghoul.png"
+        "image": "assets/ghoul.png"
     },
     {
         "name": "Mummy",
@@ -2460,7 +2460,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/mummy.png"
+        "image": "assets/mummy.png"
     },
     {
         "name": "Skeleton",
@@ -2503,7 +2503,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/skeleton.png"
+        "image": "assets/skeleton.png"
     },
     {
         "name": "Vampire",
@@ -2574,7 +2574,7 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/vampire.png"
+        "image": "assets/vampire.png"
     },
     {
         "name": "Zombie",
@@ -2613,6 +2613,6 @@ export const FULL_CREATURES = [
         ],
         "abilities": [],
         "tables": [],
-        "image": "/assets/zombie.png"
+        "image": "assets/zombie.png"
     }
 ];
